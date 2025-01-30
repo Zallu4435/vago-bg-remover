@@ -4,37 +4,60 @@ import image_wo_bg from "../assets/image_wo_bg.png";
 
 const Result = () => {
   return (
-    <div className="mx-4 my-3 lg:mx-44 mt-14 min-h-[75vh]">
-      <div className="bg-white px-8 rounded-lg drop-shadow-sm">
-        <div className="flex flex-col gap-8 sm:grid grid-cols-2"> 
+    <div className="container mx-auto px-4 py-8 md:py-14">
+      <div className="bg-white rounded-xl shadow-md p-4 md:p-8">
+        {/* Image Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
           {/* Original Image */}
-          <div>
-            <p className="font-semibold text-gray-600 mb-2">Original</p>
-            <img className="rounded-md border" src={image_w_bg} alt="original" />
+          <div className="space-y-3">
+            <p className="font-semibold text-gray-600">Original</p>
+            <div className="aspect-w-16 aspect-h-12 w-full">
+              <img 
+                className="rounded-lg border border-gray-200 object-cover w-full h-full" 
+                src={image_w_bg} 
+                alt="Original image" 
+              />
+            </div>
           </div>
 
           {/* Background Removed Image */}
-          <div>
-            <p className="font-semibold text-gray-600 mb-2">Background Removed</p>
-            <div className="rounded-md border border-gray-300 h-full relative bg-layer overflow-hidden">
-              <img src={image_wo_bg} alt="background removed" />
-              {/* Loader (Commented) */}
-              {/* <div className="absolute right-1/2 bottom-1/2 transform translate-x-1/2 translate-y-1/2">
-                <div className="border-4 border-violet-600 rounded-full h-12 w-12 border-t-transparent animate-spin"></div>
-              </div> */}
+          <div className="space-y-3">
+            <p className="font-semibold text-gray-600">Background Removed</p>
+            <div className="aspect-w-16 aspect-h-12 w-full">
+              <div className="rounded-lg border border-gray-200 h-full bg-[#f0f0f0] bg-opacity-50 relative overflow-hidden">
+                <img 
+                  src={image_wo_bg} 
+                  alt="Image with background removed"
+                  className="object-contain w-full h-full" 
+                />
+                
+                {/* Loader */}
+                {false && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80">
+                    <div className="border-4 border-violet-600 rounded-full h-12 w-12 border-t-transparent animate-spin"/>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Download Button */}
-        <div className="flex justify-center sm:justify-end items-center flex-wrap gap-4 mt-6">
-          <button className="px-8 py-2.5 text-violet-600 text-sm border border-violet-600 rounded-full hover:scale-105 transition-all duration-700">
+        {/* Action Buttons */}
+        <div className="mt-8 flex flex-col sm:flex-row justify-center sm:justify-end items-center gap-4">
+          <button 
+            className="w-full sm:w-auto px-8 py-2.5 text-violet-600 text-sm font-medium border-2 border-violet-600 rounded-full hover:bg-violet-50 active:scale-95 transition-all duration-300"
+          >
             Try another image
           </button>
-          <a href="" className="px-8 py-2.5 text-white text-sm bg-gradient-to-r from-violet-600 to-fuchsia-500 rounded-full hover:scale-105 transition-all duration-700">Download image</a>
+          
+          <a 
+            href="" 
+            className="w-full sm:w-auto px-8 py-2.5 text-white text-sm font-medium bg-gradient-to-r from-violet-600 to-fuchsia-500 rounded-full hover:shadow-lg active:scale-95 transition-all duration-300 text-center"
+          >
+            Download image
+          </a>
         </div>
-
-      </div>  
+      </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import logo_icon from '../assets/logo_icon.svg'
 const BuyCredit = () => {
   return (
     <div className='min-h-[80vh] text-center pt-14 mb-10'>
-      <h1 className='text-center text-2xl md:text-3xl lg:text-4xl mt-4 font-semibold bg-gradient-to-r from-gray-500 to-gray-400 bg-clip-text text-transparent'>Chose the plan that's right for you</h1>
+      <h1 className='text-center text-2xl md:text-3xl lg:text-4xl mt-4 font-semibold bg-gradient-to-r from-gray-500 to-gray-400 bg-clip-text text-transparent mb-14'>Chose the plan that's right for you</h1>
       <div className='flex flex-wrap justify-center gap-6 text-left'>
         {plans?.map((item, index) => (
           <div key={index}

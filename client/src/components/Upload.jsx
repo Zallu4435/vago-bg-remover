@@ -4,11 +4,11 @@ import upload_btn_icon from "../assets/upload_btn_icon.svg";
 const Upload = () => {
   return (
     <div className="pb-16">
-      <h1 className="text-center text-2xl md:text-3xl lg:text-4xl mt-4 font-semibold bg-gradient-to-r from-gray-500 to-gray-400 bg-clip-text text-transparent py-6 md:py-16">
+      <h1 className="text-center text-2xl md:text-3xl lg:text-4xl mt-24 font-semibold bg-gradient-to-r from-gray-500 to-gray-400 bg-clip-text text-transparent ">
         See the magic. Try now!
       </h1>
 
-      <div className="text-center mt-24">
+      <div className="text-center mt-10">
         <input type="file" name="" id="upload2" hidden />
         <label
           htmlFor="upload2"
