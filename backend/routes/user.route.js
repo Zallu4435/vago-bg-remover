@@ -5,16 +5,21 @@ import { authUser } from '../middlewares/auth.js';
 const userRouter = express.Router();
 
 // userRouter.post('/webhooks', clerkWebhooks);
-userRouter.use("/webhooks", (req, res, next) => {
-    console.log("Incoming Webhook:", req.method, req.headers, req.body);
-    next();
-    
+userRouter.use("/webhooks", clerkWebhooks);
+
+  userRouter.post("/webhooks", (req, res) => {
+    // Your webhook logic here
+    res.json({ success: true });
   });
+
+  userRouter.post("/webhooks", (req, res) => {
+    console.log("Webhook data received:", req.body);
+    res.json({ success: true });
+  });
+  
   
 userRouter.get('/credits', authUser, userCredits)
 
-userRouter.get("/test-get", (req, res) => {
-    res.json({ message: "GET /test-get works!" });
-  });
+
 
 export default userRouter;

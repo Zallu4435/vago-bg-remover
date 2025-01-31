@@ -12,10 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-  origin: "*", 
+  origin: ["http://localhost:5173/", process.env.FRONTEND_URL], 
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE"], 
-  allowedHeaders: ["Content-Type", "Authorization"], 
 }));
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -26,18 +24,30 @@ app.post("/test", (req, res) => {
   res.json({ message: "Test successful" });
 });
 
-app.get("/test-get", (req, res) => {
-  res.json({ message: "GET /test-get works!" });
-});
-
-
-app.use((req, res, next) => {
-  console.log("🔹 Incoming Request:", req.method, req.url, req.headers);
+userRouter.use("/api/user/webhooks", (req, res, next) => {
+  console.log("Incoming Webhook:", req.method, req.headers, req.body);
   next();
+  
 });
+
+userRouter.use("/api/webhooks", (req, res, next) => {
+  console.log("Incoming Webhook:", req.method, req.headers, req.body);
+  next();
+  
+});
+
+userRouter.use("/webhooks", (req, res, next) => {
+  console.log("Incoming Webhook:", req.method, req.headers, req.body);
+  next();
+  
+});
+// app.use((req, res, next) => {
+//   console.log("🔹 Incoming Request:", req.method, req.url, req.headers);
+//   next();
+// });
 
 app.use('/api/user', userRouter)
 
-app.listen(PORT, "0.0.0.0", () => {
+app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 })
