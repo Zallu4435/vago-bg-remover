@@ -1,9 +1,11 @@
 import { Webhook } from "svix";
 import User from "../models/user.model.js";
 
+console.log("CLER_WEBHOOK_SECRET:", process.env.CLER_WEBHOOK_SECRET);
+
 export const clerkWebhooks = async (req, res) => {
   try {
-    console.log("inside clerkWebhook")
+    console.log("inside clerkWebhook");
     const whook = new Webhook(process.env.CLER_WEBHOOK_SECRET);
 
     await whook.verify(JSON.stringify(req.body), {
@@ -18,14 +20,20 @@ export const clerkWebhooks = async (req, res) => {
       case "user.created": {
         const userData = {
           clerkId: data.id,
-          email: data.email_address[0].email_address,
+          email: data.email_addresses[0].email_address,
           firstName: data.first_name,
           lastName: data.last_name,
           photo: data.image_url,
         };
-
-        await User.create(userData);
-        res.json({});
+      
+        try {
+          const user = await User.create(userData);
+          console.log("User created:", user);
+          res.status(201).json({ success: true, user });
+        } catch (error) {
+          console.error("Error creating user:", error);
+          res.status(500).json({ success: false, error: error.message });
+        }
         break;
       }
       case "user.updated": {
@@ -55,20 +63,19 @@ export const clerkWebhooks = async (req, res) => {
   }
 };
 
-
 export const userCredits = async (req, res) => {
-    try {
-        const { clerkId } = req.body
+  try {
+    const { clerkId } = req.body;
 
-        console.log(clerkId, 'clerkId from the back')
+    console.log(clerkId, "clerkId from the back");
 
-        const userData = await User.findOne({clerkId})
+    const userData = await User.findOne({ clerkId });
 
-        console.log(userData, 'userData')
+    console.log(userData, "userData");
 
-        res.json({success: true, credits:userData.creditBalance})
-    } catch (err) {
-        console.log(err.message);
-        res.json({success: false, message: err.message})
-    }
-}
+    res.json({ success: true, credits: userData.creditBalance });
+  } catch (err) {
+    console.log(err.message);
+    res.json({ success: false, message: err.message });
+  }
+};
