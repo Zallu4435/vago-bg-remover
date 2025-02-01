@@ -1,25 +1,26 @@
-import express from 'express'
-import { clerkWebhooks, userCredits } from '../controllers/user.controller.js'
+import express from 'express';
+import { clerkWebhooks, userCredits } from '../controllers/user.controller.js';
 import { authUser } from '../middlewares/auth.js';
+import bodyParser from 'body-parser';
 
 const userRouter = express.Router();
 
-// userRouter.post('/webhooks', clerkWebhooks);
-userRouter.use("/webhooks", clerkWebhooks);
+// Parse the raw body for signature verification (important for webhooks)
+userRouter.use("/webhooks", bodyParser.raw({ type: "application/json" }));
 
-  userRouter.post("/webhooks", (req, res) => {
-    // Your webhook logic here
-    res.json({ success: true });
-  });
+// Handle Clerk webhook events
+userRouter.post("/webhooks", async (req, res) => {
+  try {
+    console.log("Webhook received");
+    await clerkWebhooks(req, res);  // Call the webhook controller
+    res.status(200).send('Webhook processed');
+  } catch (error) {
+    console.error("Error in webhook handling:", error);
+    res.status(400).send('Invalid webhook');
+  }
+});
 
-  userRouter.post("/webhooks", (req, res) => {
-    console.log("Webhook data received:", req.body);
-    res.json({ success: true });
-  });
-  
-  
-userRouter.get('/credits', authUser, userCredits)
-
-
+// User credits route
+userRouter.get('/credits', authUser, userCredits);
 
 export default userRouter;
