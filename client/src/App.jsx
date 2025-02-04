@@ -24,7 +24,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/result" element={<ProtectedRoute element={<Result />} />} />
         <Route path="/buy-credit" element={<ProtectedRoute element={<BuyCredit />} />} />
-        <Route path="*" element={<NotFound />} /> {/* 404 Page */}
+        <Route path="*" element={<NotFound />} /> 
       </Routes>
       <Footer />
     </div>
