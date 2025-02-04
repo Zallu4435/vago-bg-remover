@@ -18,35 +18,60 @@ const Navbar = () => {
   }, [isSignedIn]);
 
   return (
-    <div className="flex items-center justify-between mx-4 py-3 lg:mx-44">
-      <Link to="/" className="flex items-center gap-2">
-        <img className="w-28 sm:w-32" src={assets?.logo} alt="VAGO Logo" />
-        <span className="text-2xl sm:text-3xl font-semibold">
-          <span className="text-violet-600 uppercase tracking-wide font-bold">
+    <div className="flex items-center justify-between px-4 py-3 lg:px-44">
+      {/* Logo Section */}
+      <Link to="/" className="flex items-center gap-1 sm:gap-2">
+        <img 
+          className="w-20 sm:w-28 md:w-32" 
+          src={assets?.logo} 
+          alt="VAGO Logo" 
+        />
+        <div className="flex flex-col sm:flex-row items-start sm:items-center">
+          <span className="text-lg sm:text-2xl md:text-3xl font-semibold text-violet-600 uppercase tracking-wide">
             VAGO
           </span>
-          <span className="ml-2 bg-gradient-to-r from-violet-600 to-fuchsia-500 bg-clip-text text-transparent font-normal opacity-70">
+          <span className="text-sm sm:text-2xl md:text-3xl ml-0 sm:ml-2 bg-gradient-to-r from-violet-600 to-fuchsia-500 bg-clip-text text-transparent font-normal opacity-70">
             Bg-Remover
           </span>
-        </span>
+        </div>
       </Link>
 
+      {/* Auth Section */}
       {isSignedIn ? (
-        <div className="flex items-center gap-2 sm:gap-3 ">
-          <button onClick={() => navigate('/buy-credit')} className="flex items-center gap-2 bg-blue-100 px-4 sm:px-7 py-1.5 sm:py-2.5 rounded-full hover:scale-105 transition-all duration-700 cursor-pointer">
-            <img className="w-5" src={assets?.credit_icon} alt=""/>
-            <p className="text-xs sm:text-sm font-medium text-gray-600">Credits: {credit}</p>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <button 
+            onClick={() => navigate('/buy-credit')} 
+            className="flex items-center gap-1 sm:gap-2 bg-blue-100 px-2 sm:px-4 md:px-7 py-1.5 sm:py-2.5 rounded-full hover:scale-105 transition-all duration-700 cursor-pointer"
+          >
+            <img 
+              className="w-4 sm:w-5" 
+              src={assets?.credit_icon} 
+              alt=""
+            />
+            <p className="text-xs sm:text-sm font-medium text-gray-600 whitespace-nowrap">
+              Credits: {credit}
+            </p>
           </button>
-          <p className="text-gray-600 max-sm:hidden">Hi, {user.fullName}</p>
-          <UserButton />{" "}
+          
+          <p className="hidden md:block text-gray-600">
+            Hi, {user.fullName}
+          </p>
+          
+          <div className="scale-75 sm:scale-90 md:scale-100">
+            <UserButton />
+          </div>
         </div>
       ) : (
         <button
           onClick={() => openSignIn({})}
-          className="bg-zinc-800 text-white flex items-center gap-4 px-4 py-2 sm:px-8 sm:py-3 text-sm rounded-full"
+          className="bg-zinc-800 text-white flex items-center gap-2 sm:gap-4 px-3 py-1.5 sm:px-8 sm:py-3 text-xs sm:text-sm rounded-full whitespace-nowrap"
         >
           Get Started
-          <img src={assets?.arrow_icon} alt='"' />
+          <img 
+            className="w-4 sm:w-auto" 
+            src={assets?.arrow_icon} 
+            alt='"' 
+          />
         </button>
       )}
     </div>

@@ -69,7 +69,7 @@ const BuyCredit = () => {
 
   return (
     <div className="min-h-[80vh] text-center pt-14 mb-10">
-      <h1 className="text-center text-2xl md:text-3xl lg:text-4xl mt-4 font-semibold bg-gradient-to-r from-gray-500 to-gray-400 bg-clip-text text-transparent mb-14">
+      <h1 className="text-center text-xl md:text-3xl lg:text-4xl mt-4 font-semibold bg-gradient-to-r from-gray-500 to-gray-400 bg-clip-text text-transparent mb-14">
         Choose the plan that's right for you
       </h1>
 
@@ -99,7 +99,7 @@ const BuyCredit = () => {
 
       <button
         onClick={() => setShowHistory(true)}
-        className="mt-10 bg-gray-800 text-white py-2 px-6 rounded-md hover:bg-gray-700"
+        className="mt-10 bg-gray-800 text-white md:mt-16 py-2 px-6 rounded-md hover:bg-gray-700"
       >
         View Transaction History
       </button>

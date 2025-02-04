@@ -6,7 +6,7 @@ const Header = () => {
   const {removeBg} = useContext(AppContext);
 
   return (
-    <div className="container mx-auto px-4 py-8 md:py-16">
+    <div className="container mx-auto px-4 py-16 md:py-16">
       <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12">
         {/* Left content section */}
         <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
