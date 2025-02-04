@@ -18,6 +18,7 @@ const AppContextProvider = (props) => {
   const { isSignedIn } = useUser();
   const { openSignIn } = useClerk();
 
+  // Function to load current credits
   const loadCreditsData = async () => {
     try {
       const token = await getToken();
@@ -32,6 +33,32 @@ const AppContextProvider = (props) => {
       toast.error(err?.message);
     }
   };
+
+  const payment = async (plan) => {
+    try {
+      const token = await getToken();
+      const { data } = await axios.post(
+        `${backendUrl}/api/user/update-credits`,
+        {
+          credits: plan.credits,
+          planId: plan.id,
+          amount: plan.price,
+        },
+        {
+          headers: {
+            token,
+          },
+        }
+      );
+
+      setCredit(data.credits);
+      toast.success("Payment successful! Your credits have been updated.");
+    } catch (err) {
+      console.log(err);
+      toast.error("Error during payment processing.");
+    }
+  };
+
   const removeBg = async (image) => {
     try {
       if (!isSignedIn) {
@@ -43,30 +70,28 @@ const AppContextProvider = (props) => {
 
       const token = await getToken();
       const formData = new FormData();
-      image && formData.append("image", image); 
+      image && formData.append("image", image);
 
-      // Call backend to process image with Photoroom API
       const { data } = await axios.post(
         `${backendUrl}/api/image/remove-bg`,
         formData,
         {
           headers: {
-            token: token, // Include the token for authentication
-            // Do not manually set Content-Type header for FormData in the browser
+            token: token,
           },
         }
       );
 
       if (data.success) {
-        setResultImage(data.resultImage); // Set the result image received from backend
+        setResultImage(data.resultImage);
         if (data.creditBalance) {
-          setCredit(data.creditBalance); // Update credits if response includes creditBalance
+          setCredit(data.creditBalance);
         }
         navigate("/result");
       } else {
         toast.error(data.message || "Error removing background");
         if (data.creditBalance === 0) {
-          navigate("/buy-credit"); // Navigate to buy page if no credits left
+          navigate("/buy-credit");
         }
       }
     } catch (err) {
@@ -85,6 +110,7 @@ const AppContextProvider = (props) => {
     removeBg,
     resultImage,
     setResultImage,
+    payment,
   };
 
   return (

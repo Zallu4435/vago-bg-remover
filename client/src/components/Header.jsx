@@ -1,6 +1,5 @@
 import { useContext } from "react";
-import upload_btn_icon from "../assets/upload_btn_icon.svg";
-import header_img from "../assets/header_img.png";
+import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 
 const Header = () => {
@@ -40,7 +39,7 @@ const Header = () => {
             >
               <img
                 width={20}
-                src={upload_btn_icon}
+                src={assets?.upload_btn_icon}
                 alt="upload icon"
                 className="w-4 sm:w-5"
               />
@@ -54,7 +53,7 @@ const Header = () => {
         {/* Right image section */}
         <div className="w-full md:w-1/2">
           <img
-            src={header_img}
+            src={assets?.header_img}
             alt="Header illustration"
             className="w-full h-auto object-contain max-w-md mx-auto"
           />

@@ -1,12 +1,36 @@
-import { useContext } from "react";
+import { useContext, useRef, useState } from "react";
 import { AppContext } from "../context/AppContext";
 
 const Result = () => {
-  const { resultImage, image } = useContext(AppContext);
+  const { resultImage, image, removeBg } = useContext(AppContext);
+  const fileInputRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleTryNewImage = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setLoading(true); // Start loading when processing begins
+      removeBg(file).finally(() => setLoading(false)); // Stop loading after process completes
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 py-8 md:py-14">
       <div className="bg-white rounded-xl shadow-md p-4 md:p-8">
+        {/* Hidden file input */}
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          accept="image/*"
+          className="hidden"
+          disabled={loading}
+        />
+        
         {/* Image Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
           {/* Original Image */}
@@ -43,20 +67,32 @@ const Result = () => {
             </div>
           </div>
         </div>
+        
         {/* Action Buttons */}
         {resultImage && (
           <div className="mt-8 flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4">
             <button 
-              className="w-full sm:w-auto px-8 py-2.5 text-violet-600 text-sm font-medium border-2 border-violet-600 rounded-full hover:bg-violet-50 active:scale-95 transition-all duration-300"
+              onClick={handleTryNewImage}
+              className={`w-full sm:w-auto px-8 py-2.5 text-sm font-medium border-2 rounded-full transition-all duration-300 ${
+                loading 
+                  ? "cursor-not-allowed opacity-50 border-gray-400 text-gray-400"
+                  : "text-violet-600 border-violet-600 hover:bg-violet-50 active:scale-95"
+              }`}
+              disabled={loading}
             >
-              Try another image
+              {loading ? "Processing..." : "Try another image"}
             </button>
             <a 
               href={resultImage} 
               download
-              className="w-full sm:w-auto px-8 py-2.5 text-white text-sm font-medium bg-gradient-to-r from-violet-600 to-fuchsia-500 rounded-full hover:shadow-lg active:scale-95 transition-all duration-300 text-center"
+              className={`w-full sm:w-auto px-8 py-2.5 text-sm font-medium rounded-full text-center transition-all duration-300 ${
+                loading 
+                  ? "cursor-not-allowed opacity-50 bg-gray-400"
+                  : "text-white bg-gradient-to-r from-violet-600 to-fuchsia-500 hover:shadow-lg active:scale-95"
+              }`}
+              style={{ pointerEvents: loading ? "none" : "auto" }}
             >
-              Download image
+              {loading ? "Processing..." : "Download image"}
             </a>
           </div>
         )}

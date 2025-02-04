@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import image_w_bg from "../assets/image_w_bg.png";
-import image_wo_bg from "../assets/image_wo_bg.png";
+import { assets } from '../assets/assets'
 
 const BgSlider = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
@@ -17,13 +16,13 @@ const BgSlider = () => {
 
       <div className="relative w-full overflow-hidden max-w-3xl m-auto rounded-xl">
         <img
-          src={image_w_bg}
+          src={assets?.image_w_bg}
           style={{ clipPath: `inset(0 ${100.2 - sliderPosition}% 0 0)` }}
           alt=""
         />
         <img
           className="absolute top-0 left-0 w-full h-full"
-          src={image_wo_bg}
+          src={assets?.image_wo_bg}
           style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
           alt=""
         />

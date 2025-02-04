@@ -1,14 +1,10 @@
-import React from 'react';
-import logo from '../assets/logo.png';
-import facebook_icon from '../assets/facebook_icon.svg';
-import twitter_icon from '../assets/twitter_icon.svg';
-import google_plus_icon from '../assets/google_plus_icon.svg';
+import { assets } from '../assets/assets'
 
 const Footer = () => {
   const socialIcons = [
-    { icon: facebook_icon, alt: 'Facebook', link: '#' },
-    { icon: twitter_icon, alt: 'Twitter', link: '#' },
-    { icon: google_plus_icon, alt: 'Google Plus', link: '#' }
+    { icon: assets?.facebook_icon, alt: 'Facebook', link: '#' },
+    { icon: assets?.twitter_icon, alt: 'Twitter', link: '#' },
+    { icon: assets?.google_plus_icon, alt: 'Google Plus', link: '#' }
   ];
 
   return (
@@ -18,7 +14,7 @@ const Footer = () => {
           {/* Logo */}
           <div className="w-32 sm:w-40">
             <img 
-              src={logo} 
+              src={assets?.logo} 
               alt="Company Logo"
               className="w-24 h-auto hover:opacity-90 transition-opacity"
             />

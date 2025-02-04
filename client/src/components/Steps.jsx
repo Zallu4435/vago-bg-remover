@@ -1,7 +1,4 @@
-import React from "react";
-import upload_icon from "../assets/upload_icon.svg";
-import remove_bg_icon from "../assets/remove_bg_icon.svg";
-import downloas_icon from "../assets/download_icon.svg";
+import { assets } from "../assets/assets";
 
 const Steps = () => {
   return (
@@ -11,7 +8,7 @@ const Steps = () => {
       </h1>
       <div className="flex items-start flex-wrap gap-4 mt-16 xl:mt-14 justify-center">
         <div className="flex items-start gap-4 bg-white border drop-shadow-md rounded p-7 pb-10 hover:scale-105 transition-all duration-500">
-          <img className="max-w-9" src={upload_icon} alt="" />
+          <img className="max-w-9" src={assets?.upload_icon} alt="" />
           <div>
             <p className="text-xl font-medium">Remove background</p>
             <p className="text-sm text-neutral-500 mt-1">
@@ -21,7 +18,7 @@ const Steps = () => {
           </div>
         </div>
         <div className="flex items-start gap-4 bg-white border drop-shadow-md rounded p-7 pb-10 hover:scale-105 transition-all duration-500">
-          <img className="max-w-9" src={remove_bg_icon} alt="" />
+          <img className="max-w-9" src={assets?.remove_bg_icon} alt="" />
           <div>
             <p className="text-xl font-medium">Upload image</p>
             <p className="text-sm text-neutral-500 mt-1">
@@ -31,7 +28,7 @@ const Steps = () => {
           </div>
         </div>
         <div className="flex items-start gap-4 bg-white border drop-shadow-md rounded p-7 pb-10 hover:scale-105 transition-all duration-500">
-          <img className="max-w-9" src={downloas_icon} alt="" />
+          <img className="max-w-9" src={assets?.downloas_icon} alt="" />
           <div>
             <p className="text-xl font-medium">Download image</p>
             <p className="text-sm text-neutral-500 mt-1">
