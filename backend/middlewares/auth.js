@@ -20,7 +20,6 @@ export const authUser = async (req, res, next) => {
       });
     }
 
-    // Add clerkId to request body
     req.body.clerkId = token_decode.clerkId;
     next();
   } catch (err) {

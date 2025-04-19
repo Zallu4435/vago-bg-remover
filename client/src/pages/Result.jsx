@@ -13,8 +13,8 @@ const Result = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setLoading(true); // Start loading when processing begins
-      removeBg(file).finally(() => setLoading(false)); // Stop loading after process completes
+      setLoading(true); 
+      removeBg(file).finally(() => setLoading(false));
     }
   };
 
